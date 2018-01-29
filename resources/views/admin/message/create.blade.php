@@ -14,7 +14,7 @@
     @endif
 
     {{--成功時のメッセージ--}}
-    @if ($_flash_msg = Session::get('$_flash_msg'))
+    @if ($_flash_msg = Session::get('_flash_msg'))
         <p class="info-box">{{ $_flash_msg }}</p>
     @endif
 

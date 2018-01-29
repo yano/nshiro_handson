@@ -35,17 +35,24 @@ Route::namespace('Signup')->as('signup.')->group(function () {
 Route::prefix('user')->namespace('User')->as('user.')->group(function () {
 
     Route::middleware('guest:user')->group(function () {
-        Route::get('login', 'UserController@login')->name('login');
+        Route::get ('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login')->name('login');
     });
 
     // login後に見れるView
     Route::middleware('auth:user')->group(function () {
-        // thanks画面
+
         Route::get('thanks', 'UserController@thanks')->name('thanks');
-        // logout
+        Route::get(''      , 'UserController@top')   ->name('top');
         Route::get('logout', 'UserController@logout')->name('logout');
-        // top画面
-        Route::get('', 'UserController@top')->name('top');
+
+        // 登録情報編既往
+        Route::get ('profile/edit', 'ProfileController@index')->name('profile.edit');
+        Route::post('profile/edit', 'ProfileController@update');
+
+        // メッセージ閲覧
+        Route::get('message', 'MessageController@index')->name('message.index');
+        Route::get('message/{message}', 'MessageController@show')->name('message.show');
     });
 
 });
@@ -73,8 +80,10 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function (){
         Route::post('message/create', 'MessageController@store');
         Route::get ('message/edit/{message}', 'MessageController@edit')->name('message.edit');
         Route::post('message/edit/{message}', 'MessageController@update');
+
         // ユーザ一関係
-        Route::get ('user', 'UserController@index')->name('user.index');
+        Route::get   ('user', 'UserController@index')->name('user.index');
+        Route::delete('user/destroy/{user}', 'UserController@destroy')->name('user.destroy');
 
     });
 

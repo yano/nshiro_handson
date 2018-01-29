@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // messages_countを設定してくれる。messagesカウントは高速
+    protected $withCount = ['messages'];
 
     // A user has many messages
     public function messages()

@@ -13,7 +13,39 @@
 
 <body>
 
-<p>ユーザーログイン画面です。</p>
+<h2>ユーザログイン</h2>
+
+{{--エラー出力--}}
+@if ($errors->any())
+    <ul class="error-box">
+        @foreach($errors->all() as $_error)
+            <li>{{ $_error }}</li>
+        @endforeach
+    </ul>
+@endif
+
+
+<form method="POST">
+
+    {{ csrf_field() }}
+
+    <ul>
+        <li>
+            <label for="id_email">メールアドレス</label>
+            <input type="text" id="id_email" name="email" value="{{ old('email') }}">
+        </li>
+        <li>
+            <label for="id_password">パスワード</label>
+            <input type="password" id="id_password" name="password">
+        </li>
+    </ul>
+
+    <input type="submit" value="ログイン">
+</form>
+
+
+
+
 <a href="{{ route('signup.index') }}">ユーザー登録画面へ</a>
 
 </body>

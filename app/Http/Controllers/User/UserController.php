@@ -7,12 +7,6 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function login()
-    {
-        //TODO:
-        return view('user.login');
-    }
-
     public function thanks()
     {
         return view('user.thanks');
